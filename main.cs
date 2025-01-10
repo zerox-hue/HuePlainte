@@ -1,4 +1,4 @@
-﻿using HueHelper;
+using HueHelper;
 using Life;
 using Life.BizSystem;
 using Life.Network;
@@ -197,18 +197,22 @@ namespace HuePlainte
 
                     panel.AddButton("Refuser", ui =>
                     {
-                        Nova.server.SendLocalText("<color=#de1414>L'individu refuse de laisser le policier regarder ses plaintes !</color>", 5, player.setup.transform.position);
+                        Nova.server.SendLocalText("<color=#de1414>L'individu refuse de laisser le policier regarder ses plaintes !</color>", 5, target.setup.transform.position);
+
+                        target.ClosePanel(ui);
                     });
 
 
                     panel.AddButton("Accepter", ui =>
                     {
-                        Nova.server.SendLocalText($"<color=#2af537>{target.GetFullName()} accepte de laisser le policier regarder ses plaintes !</color>", 5, player.setup.transform.position);
+                        Nova.server.SendLocalText($"<color=#2af537>{target.GetFullName()} accepte de laisser le policier regarder ses plaintes !</color>", 5, target.setup.transform.position);
 
                         searchInData(player, target.GetFullName());
+
+                        target.ClosePanel(ui);
                     });
 
-                    AllHelper.PanelHelper.ShowPanel(player, panel);
+                    AllHelper.PanelHelper.ShowPanel(target, panel);
                 }
             }
             else
